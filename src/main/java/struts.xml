@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+	<package name="ssh" extends="struts-default" strict-method-invocation="false">
+		<action name="product_save" class="com.ssh.action.ProductAction" method="save" >
+		</action>
+	</package>	
+	<package name="default" extends="struts-default" namespace="/" >
+          <action name="helloAction">
+               <result>/addProduct.jsp</result>
+          </action>
+     </package>    
+     <package name="game" extends="struts-default" namespace="/" >
+          <action name="game" class="com.ssh.action.GameAction" method="game">
+               <result name="start">/game.jsp</result>
+          </action>
+          <action name="guess" class="com.ssh.action.GameAction" method="guess">
+               <result name="guess">/game.jsp</result>
+          </action>
+     </package>
+     <package name="count" extends="struts-default" namespace="/" >
+          <action name="count" class="com.ssh.action.CountAction" method="count">
+               <result name="count">/visitCount.jsp</result>
+          </action>
+     </package> 
+     <package name="user" extends="struts-default" namespace="/" >
+          <action name="user_login" class="com.ssh.action.UserAction" method="login">
+               <result name="success" type="chain">book_list</result> 
+               <result name="input">/login.jsp</result>
+          </action>
+          <action name="user_register" class="com.ssh.action.UserAction" method="register">
+               <result name="success">/login.jsp</result>
+               <result name="input">/register.jsp</result>
+          </action>
+          <action name="user_logout" class="com.ssh.action.UserAction" method="logout">
+               <result name="success" type="chain">user_login</result> 
+          </action>
+     </package> 
+      <package name="book" extends="struts-default" namespace="/" >
+          <action name="book_list" class="com.ssh.action.BookAction" method="getPageList">
+               <result name="success">/booklist.jsp</result>
+          </action>
+          <action name="book_save" class="com.ssh.action.BookAction" method="save">
+               <result name="success" type="chain">book_list</result> 
+               <result name="input">/addBook.jsp</result>              
+          </action>
+          <action name="book_update" class="com.ssh.action.BookAction" method="update">
+               <result name="success" type="chain">book_list</result> 
+               <result name="input">/updateBook.jsp</result> 
+               <result name="create">/addBook.jsp</result>              
+          </action>
+          <action name="book_delete" class="com.ssh.action.BookAction" method="delete">
+               <result name="success" type="chain">book_list</result>
+          </action>
+     </package>                   
+	 <constant name="struts.enable.DynamicMethodInvocation" value="false"></constant>
+</struts>
